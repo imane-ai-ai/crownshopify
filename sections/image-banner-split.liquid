@@ -1,0 +1,104 @@
+<div class="image-banner-split" data-section-id="{{ section.id }}">
+  {% if section.settings.image != blank %}
+    <div class="image-banner-split__image-wrapper">
+      <img src="{{ section.settings.image | img_url: '2000x' }}" 
+           alt="{{ section.settings.heading | escape }}"
+           class="image-banner-split__image"
+           loading="lazy">
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .image-banner-split {
+    width: 100%;
+    height: {{ section.settings.height }}vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-banner-split__image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .image-banner-split__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position }};
+  }
+
+  @media (max-width: 768px) {
+    .image-banner-split {
+      height: {{ section.settings.height_mobile }}vh;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image Banner Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Desktop Height",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile Height",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner Split",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
